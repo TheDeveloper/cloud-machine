@@ -1,1 +1,47 @@
 #!/usr/bin/env bash
+
+isEmpty() {
+  return $(test -z "$1")
+}
+
+dirExists() {
+  return $(test -d "$1")
+}
+
+# create new cloud-machine state
+# usage:
+#    init [path]
+#
+# examples:
+#   create at $HOME/.cloud-machine:
+#     init
+#   create at ./cloud-machine:
+#     init ./cloud-machine
+#
+# init $1
+# init [path]
+init() {
+  local location
+  location=$1
+
+  if isEmpty $location; then
+    location="$HOME/.cloud-machine"
+  fi
+
+  if ! dirExists $location; then
+    mkdir -p $location
+  fi
+}
+
+# cloud-machine $1 $2
+case $1 in
+  init)
+    # usage:
+    #   cloud-machine init [path]
+    #
+    # examples:
+    #   cloud-machine init
+    #   cloud-machine init ./cloud-machine
+    init $2
+  ;;
+esac
