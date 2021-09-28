@@ -24,12 +24,12 @@ init() {
   local location
   location=$1
 
-  if isEmpty $location; then
+  if isEmpty "$location"; then
     location="$HOME/.cloud-machine"
   fi
 
-  if ! dirExists $location; then
-    mkdir -p $location
+  if ! dirExists "$location"; then
+    mkdir -p "$location"
   fi
 }
 
@@ -42,6 +42,6 @@ case $1 in
     # examples:
     #   cloud-machine init
     #   cloud-machine init ./cloud-machine
-    init $2
+    init "$2"
   ;;
 esac
